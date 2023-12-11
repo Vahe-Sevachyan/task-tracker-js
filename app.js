@@ -10,6 +10,7 @@ class Task {
     this.completed = true;
   }
 }
+
 let tasks = [];
 
 function addTask() {
@@ -31,13 +32,26 @@ function displayTasks() {
 
   tasks.forEach((task) => {
     const listItem = document.createElement("li");
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-button";
+    removeBtn.innerHTML = "Remove Button";
     listItem.textContent = `${task.description} (${
       task.completed ? "Completed" : "Pending"
     })`;
+    removeBtn.addEventListener("click", (index) => {
+      tasks.splice(index, 1);
+      displayTasks();
+    });
     listItem.addEventListener("click", () => {
       task.markCompleted();
       displayTasks();
     });
+    listItem.appendChild(removeBtn);
     taskList.appendChild(listItem);
   });
 }
+
+// function removeTask() {
+//   removeBtn.splice(tasks.length - 1);
+//   displayTasks();
+// }
