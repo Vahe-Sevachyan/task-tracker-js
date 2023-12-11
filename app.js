@@ -33,6 +33,9 @@ function displayTasks() {
   tasks.forEach((task) => {
     const listItem = document.createElement("li");
     const removeBtn = document.createElement("button");
+    const completedBtn = document.createElement("button");
+    completedBtn.className = "completed-button";
+    completedBtn.innerHTML = "Completed Button";
     removeBtn.className = "remove-button";
     removeBtn.innerHTML = "Remove Button";
     listItem.textContent = `${task.description} (${
@@ -42,10 +45,11 @@ function displayTasks() {
       tasks.splice(index, 1);
       displayTasks();
     });
-    listItem.addEventListener("click", () => {
+    completedBtn.addEventListener("click", () => {
       task.markCompleted();
       displayTasks();
     });
+    listItem.appendChild(completedBtn);
     listItem.appendChild(removeBtn);
     taskList.appendChild(listItem);
   });
